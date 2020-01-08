@@ -16,13 +16,14 @@ def lengthOfLongestSubstring(s):
             if char not in substring:
                 substring += char
 
-                print('substring ->', substring)
             else:
                 substring_dictionary[substring] = len(substring)
                 if char == substring[-1]:
                     substring = char
                 else:
-                    substring = substring[-1] + char
+                    # add remaining substring after repeated char with new char
+                    index = substring.index(char)
+                    substring = substring[index+1:] + char
          
         substring_dictionary[substring] = len(substring)
    
@@ -41,7 +42,7 @@ class TestFunction(unittest.TestCase):
         self.assertEqual(lengthOfLongestSubstring(" "),1)
         self.assertEqual(lengthOfLongestSubstring("ae"),2)
         self.assertEqual(lengthOfLongestSubstring("dvdf"),3)
-
+        self.assertEqual(lengthOfLongestSubstring("anviaj"),5)
 
 
 if __name__ == "__main__":
